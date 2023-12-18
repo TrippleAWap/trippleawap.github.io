@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 15px;
+            color: #fff;
+            height: 2em;
+            background-color: rgb(72, 72, 72);
+            text-align: center;
+            top: 0;
+            width: 100%;
+            margin: 0;
+            line-height: 2em;
+        }
+
+        #myForm {
+            position: absolute;
+            left: 50px;
+            width: 10%;
+            background-color: #a2a2a2;
+            padding: 20px;
+            scale: 1;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        #myForm label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #myForm input[type="number"],
+        #myForm input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #myForm select {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        #myForm input[type="submit"] {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0e0b22;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #myForm input[type="submit"]:hover {
+            background-color: #1e1d25;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>LoseAnotherRealm</h1>
+    <form id="myForm">
+        <label for="packetCount">Packet Count:</label>
+        <input type="number" id="packetCount" name="packetCount">
+        <label for="secondsCount">Seconds Count:</label>
+        <input type="number" id="secondsCount" name="secondsCount">
+        <label>Realm Code or IP:</label>
+        <select id="selectionType">
+            <option value="realm">Realm</option>
+            <option value="ip">IP</option>
+        </select>
+        <div id="realmCodeSection" style="display: none;">
+            <label for="realmCode">Realm Code:</label>
+            <input type="text" id="realmCode" name="realmCode">
+        </div>
+        <div id="ipSection" style="display: none;">
+            <label for="ip">IP:</label>
+            <input type="text" id="ip" name="ip">
+            <label for="port">Port:</label>
+            <input type="number" id="port" name="port">
+        </div>
+        <input type="button" value="Start" id="start">
+    </form>
+    <div id="eventLog"></div>
+    <script>
+        $(document).ready(function () {
+            const submit = document.getElementById("start");
+            submit.addEventListener("click", (ev => {
+                submit.value = "Starting...";
+                submit.disabled = true;
+                // disable all inputs
+                $("#myForm input").prop("disabled", true);
+                $("#myForm select").prop("disabled", true);z
+            }))
+            $('#selectionType').change(function () {
+                var selection = $(this).val();
+                if (selection == "realm") {
+                    $("#realmCodeSection").show();
+                    $("#ipSection").hide();
+                } else {
+                    $("#ipSection").show();
+                    $("#realmCodeSection").hide();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
